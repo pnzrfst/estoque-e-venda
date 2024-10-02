@@ -1,0 +1,20 @@
+
+body {
+    background-color: rgba(223, 221, 221, 0.959);
+}
+
+header{
+    background-color: lightblue;
+}
+
+nav section .container{
+    margin-top: 5rem;
+    justify-content: space-evenly;
+    background-color: lightblue;
+    border: 1px solid rgba(223, 221, 221, 0.959);
+}
+
+
+.container #containerEstoque{
+    justify-content: space-evenly;
+}
