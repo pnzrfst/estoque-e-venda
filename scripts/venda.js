@@ -15,10 +15,25 @@ const $telefoneCliente = document.getElementById('telefoneCliente');
 const $isFiado = document.getElementById('isFiado');
 
 //buttons
+const $btns = document.getElementById('btns')
 const $salvarVenda = document.getElementById('salvarVenda');
 const $verVendas = document.getElementById('verVendas');
 const $alterarVenda = document.getElementById('alterarVenda');
-const $deletarVenda = document.getElementById('deletarVenda');
+const $comecarCadastro = document.getElementById('comecaCadastro');
+const $geraRelatorio = document.getElementById('gerarRelatorio')
+
+//form
+const $form = document.getElementById('formEntrada');
+//table
+const $tabela = document.getElementById('tabelaVenda');
+
+$comecarCadastro.onclick = () =>{
+    $comecarCadastro.style.display = 'none';
+    $form.style.display = 'inline';
+    $btns.classList.remove('disabled');
+    $tabela.classList.remove('disabled');
+    $geraRelatorio.classList.add('disabled');
+}
 
 $salvarVenda.onclick = (event) =>{
     if($isFiado.value === "Sim" || $isFiado.value === "sim"){
