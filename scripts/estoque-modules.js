@@ -1,12 +1,12 @@
-import db from "./estoque.js";
+import  {dbestoque}  from "./front/estoque.js";
 
 
 const estoqueDb = (nomeBanco, tabela) =>{
-    //criando db_estoque 
-    const db = new Dexie(nomeBanco);
-    db.version(1).stores(tabela)
-    db.open()
-    return db
+    //criando dbestoque_estoque 
+    const dbestoque = new Dexie(nomeBanco);
+    dbestoque.version(1).stores(tabela)
+    dbestoque.open()
+    return dbestoque
 }
 
 //salvar no banco function
@@ -99,7 +99,7 @@ function mostrarEstoque(estoqueTabela){
 function passarInfosForm(id){
     let integerId = parseInt((id || 0));
     
-    db.estoque.get(integerId).then(dados=> {
+    dbestoque.estoque.get(integerId).then(dados=> {
         const $nomeProduto = document.getElementById('nomeProduto');
         const $quantidadeProduto = document.getElementById('quantidadeProduto');
         const $precoProduto = document.getElementById('precoProduto');
@@ -117,9 +117,9 @@ function deletarProduto(event){
     let idProduto = parseInt(event.target.dataset.id);  
     console.log(idProduto);
     
-    db.estoque.delete(idProduto);
+    dbestoque.estoque.delete(idProduto);
 
-    mostrarEstoque(db.estoque);
+    mostrarEstoque(dbestoque.estoque);
 
 }
 

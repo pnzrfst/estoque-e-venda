@@ -1,7 +1,9 @@
 import novoBanco,  {
     salvarNoBanco,
-    mostrarVendas
-}from "./venda-modules.js"
+    mostrarVendas,
+    mostrarModal
+}from "../venda-modules.js"
+
 
 const db = novoBanco("VendasDb", {
     dadosVenda: `++id, nomeCliente, precoVenda, telefoneCliente, vendaFiada`
@@ -20,7 +22,7 @@ const $salvarVenda = document.getElementById('salvarVenda');
 const $verVendas = document.getElementById('verVendas');
 const $alterarVenda = document.getElementById('alterarVenda');
 const $comecarCadastro = document.getElementById('comecaCadastro');
-const $geraRelatorio = document.getElementById('gerarRelatorio')
+const $geraRelatorio = document.getElementById('gerarRelatorio');
 
 //form
 const $form = document.getElementById('formEntrada');
@@ -28,11 +30,13 @@ const $form = document.getElementById('formEntrada');
 const $tabela = document.getElementById('tabelaVenda');
 
 $comecarCadastro.onclick = () =>{
+    console.log('entrou')
     $comecarCadastro.style.display = 'none';
     $form.style.display = 'inline';
     $btns.classList.remove('disabled');
     $tabela.classList.remove('disabled');
     $geraRelatorio.classList.add('disabled');
+    console.log("saiu")
 }
 
 $salvarVenda.onclick = (event) =>{
@@ -104,12 +108,19 @@ $alterarVenda.onclick = () =>{
     $telefoneCliente.value = "";
     $isFiado.value = "";   
     
-}
+}   
 
 
 
 $verVendas.onclick = (() => {
     mostrarVendas(db.dadosVenda);
 })
+
+
+$geraRelatorio.onclick = (() =>{
+    console.log('ola')
+    mostrarModal()
+})
+
 
 export default db

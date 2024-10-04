@@ -3,10 +3,10 @@ import estoqueDb, {
     mostrarEstoque,
     passarInfosForm,
 
-}from "./estoque-modules.js";
+}from "../estoque-modules.js";
 
 
-const db = estoqueDb("EstoqueDb", {
+export const dbestoque = estoqueDb("EstoqueDb", {
    estoque:`++id, nomeProduto, quantidade, precoUnitario`
 })
 
@@ -24,9 +24,9 @@ const $deletarEstoque = document.getElementById('deletarEstoque');
 
 const $editbtn = document.getElementById('btnedit');
 
-//inserindo valores usando o botao de salvar
+// //inserindo valores usando o botao de salvar
 $salvarProduto.onclick = (event) =>{
-    let flag = salvarNoBanco(db.estoque, {
+    let flag = salvarNoBanco(dbestoque.estoque, {
         nomeProduto: $nomeProduto.value,
         quantidade: $quantidadeProduto.value,
         precoUnitario: $precoProduto.value
@@ -42,22 +42,20 @@ $salvarProduto.onclick = (event) =>{
 $alterarEstoque.onclick = () => {
    const id = parseInt($idProduto.value || 0);
 
-   db.estoque.update(id,{
+   dbestoque.estoque.update(id,{
        nomeProduto: $nomeProduto.value,
        quantidade: $quantidadeProduto.value,
        precoUnitario: $precoProduto.value
    }).then((atualizado) =>{
         let status = atualizado ? 'dados atualizados.' : 'não foi possivel atualizar o registro.';
         console.log(status);
-        mostrarEstoque(db.estoque)
+        mostrarEstoque(dbestoque.estoque)
    })
 };
 
 $verEstoque.onclick = (() =>{
-    mostrarEstoque(db.estoque);
+    mostrarEstoque(dbestoque.estoque);
 }) 
 
-export default db
 
-
-//consertar o input de id e seus metodos para poder atualizar e excluir
+// //consertar o input de id e seus metodos para poder atualizar e excluir

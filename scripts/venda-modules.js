@@ -1,4 +1,6 @@
-import db from "./venda.js";
+import db from "./front/venda.js";
+
+import  {dbestoque}  from "./front/estoque.js";
 
 const novoBanco = (nomeBanco, tabela) =>{
     //criando o banco de dados de venda.
@@ -88,6 +90,8 @@ function mostrarVendas(dbNomeTabela){
                 $editSpan.onclick = (event) =>{
                     const id = $editbtn.getAttribute('data-id');
                     passarInfosForm(id, venda);
+                    const $salvarVenda = document.getElementById('salvarVenda');
+                    $salvarVenda.classList.add('disabled')
                     return
                 }
 
@@ -146,6 +150,25 @@ function passarInfosForm(id){
     })
 }
 
+
+async function mostrarModal() {
+    try {
+        const produtos = await dbestoque.estoque.toArray()// Aqui, você busca a tabela estoque
+        const produtoAchar = window.prompt('Digite o produto que deseja encontrar');
+        const produtoEncontrado = produtos.filter((produto) => produto.nomeProduto.toLowerCase().includes(produtoAchar.toLowerCase()));
+
+        if (produtoEncontrado) {
+            console.log('Produto encontrado: ', produtoEncontrado);
+        } else {
+            console.log('Produto não encontrado.');
+        }
+
+    } catch (erro) {
+        console.error('Erro ao buscar produtos:', erro);
+    }
+}
+
+
 function deletarVenda(event){
     let idCliente = parseInt(event.target.dataset.id);
 
@@ -155,14 +178,9 @@ function deletarVenda(event){
 }
 
 
-
-
-
-
-
-
 export default novoBanco
 export {
     salvarNoBanco,
-    mostrarVendas
+    mostrarVendas,
+    mostrarModal
 }
