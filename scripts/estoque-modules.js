@@ -1,12 +1,12 @@
-import  {dbestoque}  from "./front/estoque.js";
 
 
-const estoqueDb = (nomeBanco, tabela) =>{
+
+export const estoqueDb = (nomeBanco, tabela) =>{
     //criando dbestoque_estoque 
-    const dbestoque = new Dexie(nomeBanco);
-    dbestoque.version(1).stores(tabela)
-    dbestoque.open()
-    return dbestoque
+    const novoBanco = new Dexie(nomeBanco);
+    novoBanco.version(1).stores(tabela)
+    novoBanco.open()
+    return novoBanco
 }
 
 //salvar no banco function
@@ -128,5 +128,4 @@ export {
     salvarNoBanco,
     mostrarEstoque,
     passarInfosForm,
-    
 }

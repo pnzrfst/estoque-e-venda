@@ -25,7 +25,7 @@ const $deletarEstoque = document.getElementById('deletarEstoque');
 const $editbtn = document.getElementById('btnedit');
 
 // //inserindo valores usando o botao de salvar
-$salvarProduto.onclick = (event) =>{
+$salvarProduto.addEventListener('click', () =>{
     let flag = salvarNoBanco(dbestoque.estoque, {
         nomeProduto: $nomeProduto.value,
         quantidade: $quantidadeProduto.value,
@@ -37,25 +37,25 @@ $salvarProduto.onclick = (event) =>{
     $nomeProduto.value = "";
     $quantidadeProduto.value = "";
     $precoProduto.value = "";
-}
+})
 
-$alterarEstoque.onclick = () => {
-   const id = parseInt($idProduto.value || 0);
+$alterarEstoque.addEventListener('click', ()  =>{
+    const id = parseInt($idProduto.value || 0);
 
-   dbestoque.estoque.update(id,{
-       nomeProduto: $nomeProduto.value,
-       quantidade: $quantidadeProduto.value,
-       precoUnitario: $precoProduto.value
-   }).then((atualizado) =>{
-        let status = atualizado ? 'dados atualizados.' : 'não foi possivel atualizar o registro.';
-        console.log(status);
-        mostrarEstoque(dbestoque.estoque)
-   })
-};
+    dbestoque.estoque.update(id,{
+        nomeProduto: $nomeProduto.value,
+        quantidade: $quantidadeProduto.value,
+        precoUnitario: $precoProduto.value
+    }).then((atualizado) =>{
+         let status = atualizado ? 'dados atualizados.' : 'não foi possivel atualizar o registro.';
+         console.log(status);
+         mostrarEstoque(dbestoque.estoque)
+    })
+})
+  
 
-$verEstoque.onclick = (() =>{
+$verEstoque.addEventListener('click', () =>{
     mostrarEstoque(dbestoque.estoque);
-}) 
-
+})
 
 // //consertar o input de id e seus metodos para poder atualizar e excluir

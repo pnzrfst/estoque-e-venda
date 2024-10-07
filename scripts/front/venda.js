@@ -1,7 +1,10 @@
+import { dbestoque } from "./estoque.js";
+import {estoqueDb} from "../estoque-modules.js"
+
 import novoBanco,  {
     salvarNoBanco,
     mostrarVendas,
-    mostrarModal
+    // mostrarModal
 }from "../venda-modules.js"
 
 
@@ -29,7 +32,7 @@ const $form = document.getElementById('formEntrada');
 //table
 const $tabela = document.getElementById('tabelaVenda');
 
-$comecarCadastro.onclick = () =>{
+$comecarCadastro.addEventListener('click', () =>{
     console.log('entrou')
     $comecarCadastro.style.display = 'none';
     $form.style.display = 'inline';
@@ -37,9 +40,9 @@ $comecarCadastro.onclick = () =>{
     $tabela.classList.remove('disabled');
     $geraRelatorio.classList.add('disabled');
     console.log("saiu")
-}
+})
 
-$salvarVenda.onclick = (event) =>{
+$salvarVenda.addEventListener('click', () =>{
     if($isFiado.value === "Sim" || $isFiado.value === "sim"){
        const isFiado = true
        let status = salvarNoBanco(db.dadosVenda, {
@@ -68,9 +71,9 @@ $salvarVenda.onclick = (event) =>{
     $isFiado.value = ""
 
     mostrarVendas(db.dadosVenda)
-}
+})
 
-$alterarVenda.onclick = () =>{
+$alterarVenda.addEventListener('click', () =>{
     const id = parseInt($idCliente.value || 0);
 
     if($isFiado.value === "Sim" || $isFiado.value === "sim"){
@@ -108,18 +111,21 @@ $alterarVenda.onclick = () =>{
     $telefoneCliente.value = "";
     $isFiado.value = "";   
     
-}   
+}) 
 
 
 
-$verVendas.onclick = (() => {
+$verVendas.addEventListener('click', () =>{
     mostrarVendas(db.dadosVenda);
 })
 
 
-$geraRelatorio.onclick = (() =>{
-    console.log('ola')
-    mostrarModal()
+$geraRelatorio.addEventListener('click', () =>{
+     async function mostrarProdutosEstoque() {
+        const produtos = await dbestoque.estoque.toArray();
+        console.log(produtos)
+     }
+    console.log(mostrarProdutosEstoque)
 })
 
 
