@@ -1,6 +1,4 @@
-import db from "./front/venda.js";
-
-// import  {dbestoque}  from "./front/estoque.js";
+import estoqueDb from "./estoque-modules.js";
 
 const novoBanco = (nomeBanco, tabela) =>{
     //criando o banco de dados de venda.
@@ -8,6 +6,11 @@ const novoBanco = (nomeBanco, tabela) =>{
     db.version(1).stores(tabela);
     return db
 }
+
+const tabela = estoqueDb("EstoqueDb", {
+   estoque:`++id, nomeProduto, quantidade, precoUnitario`
+})
+
 
 const salvarNoBanco = (nomeTabela, dados) =>{
     let status = verificarVazio(dados);
@@ -150,25 +153,6 @@ function passarInfosForm(id){
     })
 }
 
-
-// async function mostrarModal() {
-//     try {
-//         const produtos = await dbestoque.estoque.toArray()// Aqui, você busca a tabela estoque
-//         const produtoAchar = window.prompt('Digite o produto que deseja encontrar');
-//         const produtoEncontrado = produtos.filter((produto) => produto.nomeProduto.toLowerCase().includes(produtoAchar.toLowerCase()));
-
-//         if (produtoEncontrado) {
-//             console.log('Produto encontrado: ', produtoEncontrado);
-//         } else {
-//             console.log('Produto não encontrado.');
-//         }
-
-//     } catch (erro) {
-//         console.error('Erro ao buscar produtos:', erro);
-//     }
-// }
-
-
 function deletarVenda(event){
     let idCliente = parseInt(event.target.dataset.id);
 
@@ -178,9 +162,14 @@ function deletarVenda(event){
 }
 
 
+async function mostrarProdutosEstoque(){
+    // const produtos = await tabela.estoque.where('nomeProduto').equals("Pipoca").toArray();
+    console.log(tabela);
+}
+
 export default novoBanco
 export {
     salvarNoBanco,
     mostrarVendas,
-    // mostrarModal
+    mostrarProdutosEstoque
 }

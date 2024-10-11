@@ -1,12 +1,9 @@
-import { dbestoque } from "./estoque.js";
-import {estoqueDb} from "../estoque-modules.js"
 
 import novoBanco,  {
     salvarNoBanco,
     mostrarVendas,
-    // mostrarModal
+    mostrarProdutosEstoque,
 }from "../venda-modules.js"
-
 
 const db = novoBanco("VendasDb", {
     dadosVenda: `++id, nomeCliente, precoVenda, telefoneCliente, vendaFiada`
@@ -121,11 +118,7 @@ $verVendas.addEventListener('click', () =>{
 
 
 $geraRelatorio.addEventListener('click', () =>{
-     async function mostrarProdutosEstoque() {
-        const produtos = await dbestoque.estoque.toArray();
-        console.log(produtos)
-     }
-    console.log(mostrarProdutosEstoque)
+    mostrarProdutosEstoque()
 })
 
 

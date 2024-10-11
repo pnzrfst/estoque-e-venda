@@ -1,3 +1,4 @@
+
 import estoqueDb, {
     salvarNoBanco,
     mostrarEstoque,
@@ -5,11 +6,10 @@ import estoqueDb, {
 
 }from "../estoque-modules.js";
 
-
 export const dbestoque = estoqueDb("EstoqueDb", {
    estoque:`++id, nomeProduto, quantidade, precoUnitario`
 })
-
+    
 //inputs 
 const $idProduto = document.getElementById('idProduto');
 const $nomeProduto = document.getElementById('nomeProduto');
@@ -24,20 +24,20 @@ const $deletarEstoque = document.getElementById('deletarEstoque');
 
 const $editbtn = document.getElementById('btnedit');
 
-// //inserindo valores usando o botao de salvar
+//inserindo valores usando o botao de salvar
 $salvarProduto.addEventListener('click', () =>{
-    let flag = salvarNoBanco(dbestoque.estoque, {
-        nomeProduto: $nomeProduto.value,
-        quantidade: $quantidadeProduto.value,
-        precoUnitario: $precoProduto.value
-    })
+     let flag = salvarNoBanco(dbestoque.estoque, {
+         nomeProduto: $nomeProduto.value,
+         quantidade: $quantidadeProduto.value,
+         precoUnitario: $precoProduto.value
+     })
     
-    console.log(flag);
+     console.log(flag);
 
-    $nomeProduto.value = "";
-    $quantidadeProduto.value = "";
-    $precoProduto.value = "";
-})
+     $nomeProduto.value = "";
+     $quantidadeProduto.value = "";
+     $precoProduto.value = "";
+ })
 
 $alterarEstoque.addEventListener('click', ()  =>{
     const id = parseInt($idProduto.value || 0);
@@ -58,4 +58,3 @@ $verEstoque.addEventListener('click', () =>{
     mostrarEstoque(dbestoque.estoque);
 })
 
-// //consertar o input de id e seus metodos para poder atualizar e excluir

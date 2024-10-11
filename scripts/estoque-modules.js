@@ -1,7 +1,6 @@
+import { dbestoque } from "./front/estoque.js";
 
-
-
-export const estoqueDb = (nomeBanco, tabela) =>{
+var estoqueDb = (nomeBanco, tabela) =>{
     //criando dbestoque_estoque 
     const novoBanco = new Dexie(nomeBanco);
     novoBanco.version(1).stores(tabela)
