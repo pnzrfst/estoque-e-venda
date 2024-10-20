@@ -1,4 +1,3 @@
-import { dbestoque } from "./front/estoque.js";
 
 var estoqueDb = (nomeBanco, tabela) =>{
     //criando dbestoque_estoque 
@@ -7,6 +6,12 @@ var estoqueDb = (nomeBanco, tabela) =>{
     novoBanco.open()
     return novoBanco
 }
+
+var dbestoque = estoqueDb("EstoqueDb", {
+    estoque:`++id, nomeProduto, quantidade, precoUnitario`
+})
+
+
 
 //salvar no banco function
 
@@ -73,6 +78,8 @@ function mostrarEstoque(estoqueTabela){
                 $editSpan.onclick = (event) =>{
                     const id = $editbtn.getAttribute('data-id');
                     passarInfosForm(id, produto);
+                    const $salvarEstoque = document.getElementById('salvarEstoque');
+                    $salvarEstoque.classList.add('disabled')
                     return
                 }
                 
@@ -90,7 +97,9 @@ function mostrarEstoque(estoqueTabela){
                 
             })
         })
-
+    
+    const $salvarEstoque = document.getElementById('salvarEstoque');
+    $salvarEstoque.classList.remove('disabled')
     return $tbody    
  }
 
@@ -122,7 +131,7 @@ function deletarProduto(event){
 
 }
 
-export default estoqueDb
+export default dbestoque
 export {
     salvarNoBanco,
     mostrarEstoque,

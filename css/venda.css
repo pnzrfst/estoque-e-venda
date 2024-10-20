@@ -1,37 +1,165 @@
-.d-flex input{
-    margin: 0.9em 0em;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.d-flex button{
-    margin: 1.5em 0.6em;
-    padding: 0.3em 2.4em;
-}
-
-.container table{
-    margin: 1em 10em;
-    text-align: center;
-}
-
-table .btnedit{
-    color: rgb(106, 83, 209);
-    cursor: pointer;
-}
-
-table .btndelete{
-    color: red;
-    cursor: pointer;
-}
-/*----------------------------------------------------*/
-
-#formEntrada{
-    display: none;
+body{
+    background-color: #f8f9fa;
+    color:  #343a40;
 }
 
 .disabled{
     display: none;
 }
 
-.custom-shadow {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+.header-icon-infos{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #343a40;
+    color: #ffff;
+    padding: 3rem;
+    font-size: 2rem;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 
+
+.main-container{
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 5rem;
+    margin: 3rem 0 auto;
+    background-color: #ffffff;
+    color: #343a40;
+    width: 100%;
+    min-height: 600px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.089);
+}
+
+main .displayArea{
+    display: flex;
+    justify-content: space-evenly;
+    width: 80%;
+    min-height: 500px;
+    padding: 3rem;
+    margin-bottom: 1rem;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.315);
+}
+
+.areaCadastroCliente{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: 40%;
+    padding: 5rem;
+    text-align: center;
+}
+
+.areaCadastroCliente #formEntrada input{
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    margin-bottom: 1.2rem;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.089);
+}
+
+
+.itensVenda{
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    padding: 5rem;
+    text-align: center;
+}
+
+.cadastrarProduto{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+.cadastrarProduto #salvarProduto{
+    width: 30%;
+    cursor: pointer;
+    border: none;
+    background-color: lightgreen;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.226);
+    padding: 0.7rem;
+    border-radius: 5px;
+    align-self: center;
+}
+
+
+.cadastrarProduto input{
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid #ced4da;
+    flex: 1;
+    border: 5px;
+    margin-bottom: 1.2rem;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.192);
+}
+
+.itensVenda #mostrarItens{
+    display: flex;
+    justify-content: space-around;
+    align-items: first baseline;
+    width: 100%;
+    padding: 2rem;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    flex-shrink: 1;
+}
+
+#mostrarItens .produtoCompra{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    overflow-wrap: break-word;
+    width: 30%;
+    margin: 0.5rem;
+    padding: 10px;
+    gap: 1rem;
+    border: 1px solid #ced4da;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.226);
+}
+
+#editarProduto,
+#apagarProduto{
+    cursor: pointer;
+    border: none;
+    margin-bottom: 1rem;
+    width: 100%;
+    padding: 0.7rem;
+    border-radius: 4px;
+}
+
+#editarProduto{
+    background-color: rgb(253, 253, 142);
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.226);
+}
+
+#apagarProduto{
+    background-color: lightcoral;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.226);
+}
+
+.finalizaVenda{
+    margin-top: 3rem;
+    align-items: center;
+}
+
+#salvarVenda{
+    padding: 0.7rem;
+    width: 30%;
+    border: none;
+    cursor: pointer;
+    background-color: lightblue;
+    border-radius: 4px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.226);
+}

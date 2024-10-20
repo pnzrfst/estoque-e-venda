@@ -1,14 +1,11 @@
 
-import estoqueDb, {
+import dbestoque, {
     salvarNoBanco,
     mostrarEstoque,
     passarInfosForm,
 
 }from "../estoque-modules.js";
 
-export const dbestoque = estoqueDb("EstoqueDb", {
-   estoque:`++id, nomeProduto, quantidade, precoUnitario`
-})
     
 //inputs 
 const $idProduto = document.getElementById('idProduto');
@@ -20,9 +17,6 @@ const $precoProduto = document.getElementById('precoProduto');
 const $salvarProduto = document.getElementById('salvarEstoque');
 const $verEstoque = document.getElementById('verEstoque');
 const $alterarEstoque = document.getElementById('alterarEstoque');
-const $deletarEstoque = document.getElementById('deletarEstoque');
-
-const $editbtn = document.getElementById('btnedit');
 
 //inserindo valores usando o botao de salvar
 $salvarProduto.addEventListener('click', () =>{
@@ -34,6 +28,7 @@ $salvarProduto.addEventListener('click', () =>{
     
      console.log(flag);
 
+     $idProduto.value = "";
      $nomeProduto.value = "";
      $quantidadeProduto.value = "";
      $precoProduto.value = "";
@@ -51,10 +46,20 @@ $alterarEstoque.addEventListener('click', ()  =>{
          console.log(status);
          mostrarEstoque(dbestoque.estoque)
     })
+
+    $idProduto.value = "";
+    $nomeProduto.value = "";
+    $quantidadeProduto.value = "";
+    $precoProduto.value = "";
+
 })
   
 
 $verEstoque.addEventListener('click', () =>{
     mostrarEstoque(dbestoque.estoque);
+    $idProduto.value = "";
+    $nomeProduto.value = "";
+    $quantidadeProduto.value = "";
+    $precoProduto.value = "";
 })
 

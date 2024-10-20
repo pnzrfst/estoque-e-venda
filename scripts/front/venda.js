@@ -5,20 +5,23 @@ import novoBanco,  {
     mostrarProdutosEstoque,
 }from "../venda-modules.js"
 
+
+
 const db = novoBanco("VendasDb", {
     dadosVenda: `++id, nomeCliente, precoVenda, telefoneCliente, vendaFiada`
 }) 
 
+
 //inputs 
 const $idCliente = document.getElementById('idCliente');
 const $nomeCliente = document.getElementById('nomeCliente');
-const $precoVenda = document.getElementById('precoVenda');
+
 const $telefoneCliente = document.getElementById('telefoneCliente');
 const $isFiado = document.getElementById('isFiado');
 
 //buttons
 const $btns = document.getElementById('btns')
-const $salvarVenda = document.getElementById('salvarVenda');
+const $salvarCliente = document.getElementById('salvarCliente');
 const $verVendas = document.getElementById('verVendas');
 const $alterarVenda = document.getElementById('alterarVenda');
 const $comecarCadastro = document.getElementById('comecaCadastro');
@@ -39,12 +42,12 @@ $comecarCadastro.addEventListener('click', () =>{
     console.log("saiu")
 })
 
-$salvarVenda.addEventListener('click', () =>{
+$salvarCliente.addEventListener('click', () =>{
     if($isFiado.value === "Sim" || $isFiado.value === "sim"){
        const isFiado = true
        let status = salvarNoBanco(db.dadosVenda, {
         nomeCliente: $nomeCliente.value,
-        precoVenda: $precoVenda.value,
+        // precoVenda: $precoVenda.value,
         telefoneCliente: $telefoneCliente.value,
         vendaFiada: isFiado
         })
@@ -61,13 +64,12 @@ $salvarVenda.addEventListener('click', () =>{
     }
        
 
-
+    $idCliente.value = ""
     $nomeCliente.value = ""
-    $precoVenda.value = ""
+    // $precoVenda.value = ""
     $telefoneCliente.value = ""
     $isFiado.value = ""
 
-    mostrarVendas(db.dadosVenda)
 })
 
 $alterarVenda.addEventListener('click', () =>{
@@ -114,6 +116,12 @@ $alterarVenda.addEventListener('click', () =>{
 
 $verVendas.addEventListener('click', () =>{
     mostrarVendas(db.dadosVenda);
+    
+    $idCliente.value = "";
+    $nomeCliente.value = "";
+    // $precoVenda.value = "";
+    $telefoneCliente.value = "";
+    $isFiado.value = "";   
 })
 
 

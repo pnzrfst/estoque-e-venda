@@ -1,4 +1,4 @@
-import estoqueDb from "./estoque-modules.js";
+import dbestoque from "./estoque-modules.js";
 
 const novoBanco = (nomeBanco, tabela) =>{
     //criando o banco de dados de venda.
@@ -7,10 +7,9 @@ const novoBanco = (nomeBanco, tabela) =>{
     return db
 }
 
-const tabela = estoqueDb("EstoqueDb", {
-   estoque:`++id, nomeProduto, quantidade, precoUnitario`
-})
-
+const db = novoBanco("VendasDb", {
+    dadosVenda: `++id, nomeCliente, precoVenda, telefoneCliente, vendaFiada`
+}) 
 
 const salvarNoBanco = (nomeTabela, dados) =>{
     let status = verificarVazio(dados);
@@ -23,6 +22,7 @@ const salvarNoBanco = (nomeTabela, dados) =>{
         window.alert("Não foi possivel cadastrar os dados.");
     }   
 
+    mostrarVendas(db.dadosVenda)
     return status
    
 }
@@ -38,11 +38,11 @@ const verificarVazio = object =>{
 }
 
 
-function mostrarVendas(dbNomeTabela){
+function mostrarVendas(){
     const $tbody = document.getElementById('tbody');
 
     $tbody.innerHTML = '';
-    dbNomeTabela.toArray()
+    db.dadosVenda.toArray()
         .then((vendas) =>{
             vendas.forEach((venda) =>{
 
@@ -114,7 +114,9 @@ function mostrarVendas(dbNomeTabela){
             })
             
         })
-        
+    
+    const $salvarVenda = document.getElementById('salvarVenda');
+    $salvarVenda.classList.remove('disabled')
     return $tbody
 }
 
@@ -163,8 +165,8 @@ function deletarVenda(event){
 
 
 async function mostrarProdutosEstoque(){
-    // const produtos = await tabela.estoque.where('nomeProduto').equals("Pipoca").toArray();
-    console.log(tabela);
+    const produtos = await dbestoque.estoque.where('nomeProduto').equals("Bala de morango").toArray();
+    console.log(produtos);
 }
 
 export default novoBanco
