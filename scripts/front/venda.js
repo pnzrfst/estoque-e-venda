@@ -2,7 +2,7 @@
 import novoBanco,  {
     salvarNoBanco,
     mostrarVendas,
-    mostrarProdutosEstoque,
+    adicionarProdutosVenda,
 }from "../venda-modules.js"
 
 
@@ -15,29 +15,30 @@ const db = novoBanco("VendasDb", {
 //inputs 
 const $idCliente = document.getElementById('idCliente');
 const $nomeCliente = document.getElementById('nomeCliente');
-
 const $telefoneCliente = document.getElementById('telefoneCliente');
 const $isFiado = document.getElementById('isFiado');
 
 //buttons
 const $btns = document.getElementById('btns')
-const $salvarCliente = document.getElementById('salvarCliente');
+const $salvarCliente = document.getElementById('salvarVenda');
 const $verVendas = document.getElementById('verVendas');
 const $alterarVenda = document.getElementById('alterarVenda');
 const $comecarCadastro = document.getElementById('comecaCadastro');
 const $geraRelatorio = document.getElementById('gerarRelatorio');
-
+const $salvarProduto = document.getElementById('salvarProduto')
 //form
 const $form = document.getElementById('formEntrada');
 //table
 const $tabela = document.getElementById('tabelaVenda');
+//main
+const $main = document.getElementById('main')
+
 
 $comecarCadastro.addEventListener('click', () =>{
     console.log('entrou')
     $comecarCadastro.style.display = 'none';
     $form.style.display = 'inline';
-    $btns.classList.remove('disabled');
-    $tabela.classList.remove('disabled');
+    $main.classList.remove('disabled')
     $geraRelatorio.classList.add('disabled');
     console.log("saiu")
 })
@@ -56,11 +57,13 @@ $salvarCliente.addEventListener('click', () =>{
         const isFiado = false;
         let status = salvarNoBanco(db.dadosVenda, {
             nomeCliente: $nomeCliente.value,
-            precoVenda: $precoVenda.value,
+            // precoVenda: $precoVenda.value,
             telefoneCliente: $telefoneCliente.value,
             vendaFiada: isFiado
         })
         console.log(status)
+    }else{
+        window.alert('Por favor, insira um valor válido.')
     }
        
 
@@ -93,7 +96,7 @@ $alterarVenda.addEventListener('click', () =>{
        const isFiado = false
         db.dadosVenda.update(id, {
             nomeCliente: $nomeCliente.value,
-            precoVenda: $precoVenda.value,
+            // precoVenda: $precoVenda.value,
             telefoneCliente: $telefoneCliente.value,
             vendaFiada: isFiado
         }).then((atualizado) =>{
@@ -106,7 +109,7 @@ $alterarVenda.addEventListener('click', () =>{
 
     $idCliente.value = "";
     $nomeCliente.value = "";
-    $precoVenda.value = "";
+    // $precoVenda.value = "";
     $telefoneCliente.value = "";
     $isFiado.value = "";   
     
@@ -125,8 +128,8 @@ $verVendas.addEventListener('click', () =>{
 })
 
 
-$geraRelatorio.addEventListener('click', () =>{
-    mostrarProdutosEstoque()
+$salvarProduto.addEventListener('click', () =>{
+    adicionarProdutosVenda()
 })
 
 
