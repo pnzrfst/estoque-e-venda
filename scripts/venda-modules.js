@@ -8,7 +8,7 @@ const novoBanco = (nomeBanco, tabela) =>{
 }
 
 const db = novoBanco("VendasDb", {
-    dadosVenda: `++id, nomeCliente, precoVenda, telefoneCliente, vendaFiada`
+    dadosVenda: `++id, nomeCliente, telefoneCliente, vendaFiada`
 }) 
 
 const salvarNoBanco = (nomeTabela, dados) =>{
@@ -164,14 +164,69 @@ function deletarVenda(event){
 }
 
 
-async function mostrarProdutosEstoque(){
-    const produtos = await dbestoque.estoque.where('nomeProduto').equals("Bala de morango").toArray();
-    console.log(produtos);
+const precoProdutos = []
+async function adicionarProdutosVenda(){
+    const produtoFiltrar = document.getElementById('searchBar').value
+    const mostrarProdutos = document.getElementById('mostrarItens');
+
+    dbestoque.estoque
+    .where('nomeProduto')
+    .equals(produtoFiltrar)
+    .toArray()
+    .then(produtosVenda =>{
+        produtosVenda.forEach((produto) =>{
+
+            const produtoId = produto.id
+            console.log(produtoId)
+
+
+            const li = document.createElement("li");
+            li.classList.add('produtoCompra');
+
+            const nome = document.createElement("h3");
+            nome.innerText = `${produto.nomeProduto}`;
+
+            const paragrafo = document.createElement("p");
+            paragrafo.innerText = `R$ ${produto.precoUnitario}`
+
+            const divbtns = document.createElement("div");
+            
+            const qtdComprada = document.createElement("input");
+            qtdComprada.type = 'number'
+            qtdComprada.placeholder = 'Digite a quantidade'
+            qtdComprada.id = 'quantidadeComprada'
+
+            const btnEditar = document.createElement("button");
+            btnEditar.textContent = 'Editar Produto'
+            btnEditar.id = 'editarProduto'
+
+            const btnApagar = document.createElement("button");
+            btnApagar.textContent = 'Apagar produto'
+            btnApagar.id = 'apagarProduto'
+
+            divbtns.appendChild(qtdComprada)
+            divbtns.appendChild(btnEditar);
+            divbtns.appendChild(btnApagar);
+            li.appendChild(nome);
+            li.appendChild(paragrafo);
+            li.appendChild(divbtns);
+            mostrarProdutos.appendChild(li);
+            
+            precoProdutos.push(produto.precoUnitario);
+            console.log(precoProdutos)
+        })
+    })
+
+    
 }
 
 export default novoBanco
 export {
     salvarNoBanco,
     mostrarVendas,
-    mostrarProdutosEstoque
+    adicionarProdutosVenda
+}
+
+function calcularTotal(){
+
 }
