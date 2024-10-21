@@ -130,7 +130,9 @@ main .displayArea{
 }
 
 #editarProduto,
-#apagarProduto{
+#apagarProduto,
+#quantidadeComprada,
+#salvarQtd{
     cursor: pointer;
     border: none;
     margin-bottom: 1rem;
@@ -148,6 +150,17 @@ main .displayArea{
     background-color: lightcoral;
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.226);
 }
+
+#quantidadeComprada{
+    background-color: #ced4da;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.226);
+}
+
+#salvarQtd{
+    background-color: lightslategrey;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.226);
+}
+
 
 .finalizaVenda{
     margin-top: 3rem;
