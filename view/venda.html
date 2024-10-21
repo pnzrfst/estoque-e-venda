@@ -14,7 +14,7 @@
             <h1>LOGO AQUI</h1>
             <h5>Nessa área, cadastre suas vendas, ou acompanhe seus indicadores.</h5>
         </header>
-        <main class="disabled">
+        <main id="main" class="disabled">
             <section class="main-container"> 
                 <section class="displayArea">
                         <section class="areaCadastroCliente">
@@ -35,50 +35,12 @@
                                         <button type="button" id="salvarProduto">Salvar produto</button>
                                     </div>
                                     <ul id="mostrarItens">
-                                        <li class="produtoCompra">
+                                       <!-- <li class="produtoCompra">
                                             <h3>Ablublebleblebleaaaaaaaaaaaaaaaaaa</h3>
                                             <p>Blablabla</p>
                                             <div class="btn-actions-Produto">
-                                                <button id="editarProduto">Editar produto</button>
-                                                <button id="apagarProduto">Apagar produto</button>
-                                            </div>
-                                        <!-- </li>
-                                        <li class="produtoCompra">
-                                            <h3>Refrigerante</h3>
-                                            <p>Blablabla</p>
-                                            <div class="btn-actions-Produto">
-                                                <button id="editarProduto">Editar produto</button>
-                                                <button id="apagarProduto">Apagar produto</button>
-                                            </div>
-                                        </li>
-                                        <li class="produtoCompra">
-                                            <h3>Produto 3</h3>
-                                            <p>Blablabla</p>
-                                            <div class="btn-actions-Produto">
-                                                <button id="editarProduto">Editar produto</button>
-                                                <button id="apagarProduto">Apagar produto</button>
-                                            </div>
-                                        </li>
-                                        <li class="produtoCompra">
-                                            <h3>Produto 4</h3>
-                                            <p>Blablabla</p>
-                                            <div class="btn-actions-Produto">
-                                                <button id="editarProduto">Editar produto</button>
-                                                <button id="apagarProduto">Apagar produto</button>
-                                            </div>
-                                        </li>
-                                        <li class="produtoCompra">
-                                            <h3>Produto 5</h3>
-                                            <p>Blablabla</p>
-                                            <div class="btn-actions-Produto">
-                                                <button id="editarProduto">Editar produto</button>
-                                                <button id="apagarProduto">Apagar produto</button>
-                                            </div>
-                                        </li>
-                                        <li class="produtoCompra">
-                                            <h3>Produto 6</h3>
-                                            <p>Blablabla</p>
-                                            <div class="btn-actions-Produto">
+                                                <input id="quantidadeComprada" type="number" placeholder="Digite a quantidade">
+                                                <button id="salvarQtd">Salvar quantidade</button>
                                                 <button id="editarProduto">Editar produto</button>
                                                 <button id="apagarProduto">Apagar produto</button>
                                             </div>
@@ -102,7 +64,7 @@
         
         
             <section>
-                <table class="table table-striped py-3 disabled" id="tabelaVenda">
+                <table id="tabelaVenda">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
