@@ -25,7 +25,7 @@ const $verVendas = document.getElementById('verVendas');
 const $alterarVenda = document.getElementById('alterarVenda');
 const $comecarCadastro = document.getElementById('comecaCadastro');
 const $geraRelatorio = document.getElementById('gerarRelatorio');
-const $salvarProduto = document.getElementById('salvarProduto')
+const $procurarProduto = document.getElementById('procurarProduto')
 //form
 const $form = document.getElementById('formEntrada');
 //table
@@ -128,7 +128,7 @@ $verVendas.addEventListener('click', () =>{
 })
 
 
-$salvarProduto.addEventListener('click', () =>{
+$procurarProduto.addEventListener('click', () =>{
     adicionarProdutosVenda()
 })
 

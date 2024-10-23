@@ -1,5 +1,6 @@
 import dbestoque from "./estoque-modules.js";
 
+
 const novoBanco = (nomeBanco, tabela) =>{
     //criando o banco de dados de venda.
     const db = new Dexie(nomeBanco);
@@ -164,69 +165,89 @@ function deletarVenda(event){
 }
 
 
-const precoProdutos = []
-async function adicionarProdutosVenda(){
-    const produtoFiltrar = document.getElementById('searchBar').value
+const precoProdutos = [];
+
+async function adicionarProdutosVenda() {
+    const produtoFiltrar = document.getElementById('searchBar').value;
     const mostrarProdutos = document.getElementById('mostrarItens');
 
     dbestoque.estoque
-    .where('nomeProduto')
-    .equals(produtoFiltrar)
-    .toArray()
-    .then(produtosVenda =>{
-        produtosVenda.forEach((produto) =>{
+        .where('nomeProduto')
+        .equals(produtoFiltrar)
+        .toArray()
+        .then(produtosVenda => {
+            produtosVenda.forEach((produto) => {
+                const produtoId = produto.id;
+                console.log(produtoId);
 
-            const produtoId = produto.id
-            console.log(produtoId)
+                const li = document.createElement("li");
+                li.classList.add('produtoCompra');
 
+                const nome = document.createElement("h3");
+                nome.innerText = `${produto.nomeProduto}`;
 
-            const li = document.createElement("li");
-            li.classList.add('produtoCompra');
+                const paragrafo = document.createElement("p");
+                paragrafo.innerText = `R$ ${produto.precoUnitario}`;
 
-            const nome = document.createElement("h3");
-            nome.innerText = `${produto.nomeProduto}`;
+                const divbtns = document.createElement("div");
 
-            const paragrafo = document.createElement("p");
-            paragrafo.innerText = `R$ ${produto.precoUnitario}`
+                const qtdComprada = document.createElement("input");
+                qtdComprada.type = 'number';
+                qtdComprada.placeholder = 'Digite a quantidade';
+                qtdComprada.classList.add('quantidadeComprada');
 
-            const divbtns = document.createElement("div");
-            
-            const qtdComprada = document.createElement("input");
-            qtdComprada.type = 'number'
-            qtdComprada.placeholder = 'Digite a quantidade'
-            qtdComprada.id = 'quantidadeComprada'
+                const btnSalvar = document.createElement("button");
+                btnSalvar.textContent = 'Salvar Produto';
+                btnSalvar.classList.add('salvarProduto')
+                btnSalvar.addEventListener('click', () => {
+                    calcularTotalPorUnidade();
+                });
 
-            const btnEditar = document.createElement("button");
-            btnEditar.textContent = 'Editar Produto'
-            btnEditar.id = 'editarProduto'
+                const btnEditar = document.createElement("button");
+                btnEditar.textContent = 'Editar Produto';
+                btnEditar.classList.add('editarProduto')
 
-            const btnApagar = document.createElement("button");
-            btnApagar.textContent = 'Apagar produto'
-            btnApagar.id = 'apagarProduto'
+                const btnApagar = document.createElement("button");
+                btnApagar.textContent = 'Apagar produto';
+                btnApagar.classList.add('apagarProduto')
 
-            divbtns.appendChild(qtdComprada)
-            divbtns.appendChild(btnEditar);
-            divbtns.appendChild(btnApagar);
-            li.appendChild(nome);
-            li.appendChild(paragrafo);
-            li.appendChild(divbtns);
-            mostrarProdutos.appendChild(li);
-            
-            precoProdutos.push(produto.precoUnitario);
-            console.log(precoProdutos)
-        })
-    })
+                divbtns.appendChild(qtdComprada);
+                divbtns.appendChild(btnSalvar);
+                divbtns.appendChild(btnEditar);
+                divbtns.appendChild(btnApagar);
+
+                li.appendChild(nome);
+                li.appendChild(paragrafo);
+                li.appendChild(divbtns);
+
+                mostrarProdutos.appendChild(li);
+
+                precoProdutos.push(produto.precoUnitario.toString().replace(',', '.'));
+            });
+        });
+}
+
+function calcularTotalPorUnidade() {
+    const precos = precoProdutos;
+    let total = 0;
+    const $subTotalCompra = document.getElementById('subTotalCompra');
 
     
+    const quantidadeInputs = document.querySelectorAll('.quantidadeComprada');
+
+    quantidadeInputs.forEach((input, index) => {
+        const quantidade = parseInt(input.value) || 0; 
+        total += parseFloat(precos[index]) * quantidade; 
+    });
+
+    console.log(total);
+    $subTotalCompra.innerText = `R$ ${total.toFixed(2)}`; 
 }
+
 
 export default novoBanco
 export {
     salvarNoBanco,
     mostrarVendas,
     adicionarProdutosVenda
-}
-
-function calcularTotal(){
-
 }

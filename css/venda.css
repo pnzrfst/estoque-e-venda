@@ -83,11 +83,11 @@ main .displayArea{
     margin-bottom: 1rem;
 }
 
-.cadastrarProduto #salvarProduto{
+.cadastrarProduto #procurarProduto{
     width: 30%;
     cursor: pointer;
     border: none;
-    background-color: lightgreen;
+    background-color: rgb(238, 182, 144);
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.226);
     padding: 0.7rem;
     border-radius: 5px;
@@ -129,10 +129,11 @@ main .displayArea{
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.226);
 }
 
-#editarProduto,
-#apagarProduto,
-#quantidadeComprada,
-#salvarQtd{
+.salvarProduto,
+.editarProduto,
+.apagarProduto,
+.quantidadeComprada,
+.salvarQtd{
     cursor: pointer;
     border: none;
     margin-bottom: 1rem;
@@ -141,28 +142,34 @@ main .displayArea{
     border-radius: 4px;
 }
 
-#editarProduto{
+
+.salvarProduto{
+    background-color: lightgreen;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.226);
+}
+
+.editarProduto{
     background-color: rgb(253, 253, 142);
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.226);
 }
 
-#apagarProduto{
+.apagarProduto{
     background-color: lightcoral;
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.226);
 }
 
-#quantidadeComprada{
+.quantidadeComprada{
     background-color: #ced4da;
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.226);
 }
 
-#salvarQtd{
+.salvarQtd{
     background-color: lightslategrey;
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.226);
 }
 
 
-.finalizaVenda{
+#finalizaVenda{
     margin-top: 3rem;
     align-items: center;
 }
@@ -172,6 +179,7 @@ main .displayArea{
     width: 30%;
     border: none;
     cursor: pointer;
+    margin-top: 1rem;
     background-color: lightblue;
     border-radius: 4px;
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.226);
