@@ -245,6 +245,8 @@ function calcularTotalPorUnidade() {
 }
 
 
+
+
 export default novoBanco
 export {
     salvarNoBanco,

@@ -43,7 +43,7 @@ body{
 main .displayArea{
     display: flex;
     justify-content: space-evenly;
-    width: 80%;
+    width: 100%;
     min-height: 500px;
     padding: 3rem;
     margin-bottom: 1rem;
@@ -106,14 +106,15 @@ main .displayArea{
 }
 
 .itensVenda #mostrarItens{
-    display: flex;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: space-between;
     align-items: first baseline;
     width: 100%;
-    padding: 2rem;
+    padding: 4rem;
+    gap: 2rem;
     flex-grow: 1;
     flex-wrap: wrap;
-    flex-shrink: 1;
 }
 
 #mostrarItens .produtoCompra{
@@ -121,8 +122,8 @@ main .displayArea{
     display: flex;
     flex-direction: column;
     overflow-wrap: break-word;
-    width: 30%;
-    margin: 0.5rem;
+    width: 100%;
+    margin: 1rem;
     padding: 10px;
     gap: 1rem;
     border: 1px solid #ced4da;
