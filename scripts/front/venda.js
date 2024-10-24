@@ -3,6 +3,8 @@ import novoBanco,  {
     salvarNoBanco,
     mostrarVendas,
     adicionarProdutosVenda,
+    calcularTotalPorUnidade,
+    subtrairEstoque
 }from "../venda-modules.js"
 
 
@@ -31,8 +33,8 @@ const $form = document.getElementById('formEntrada');
 //table
 const $tabela = document.getElementById('tabelaVenda');
 //main
-const $main = document.getElementById('main')
-
+const $main = document.getElementById('main');
+//subtotal 
 
 $comecarCadastro.addEventListener('click', () =>{
     console.log('entrou')
@@ -48,19 +50,21 @@ $salvarCliente.addEventListener('click', () =>{
        const isFiado = true
        let status = salvarNoBanco(db.dadosVenda, {
         nomeCliente: $nomeCliente.value,
-        // precoVenda: $precoVenda.value,
+        precoVenda: calcularTotalPorUnidade() || 0,
         telefoneCliente: $telefoneCliente.value,
         vendaFiada: isFiado
         })
+        // subtrairEstoque()
         console.log(status)
     }else if($isFiado.value === "Não" || $isFiado.value === "não" || $isFiado.value === "Nao" || $isFiado.value === "nao"){
         const isFiado = false;
         let status = salvarNoBanco(db.dadosVenda, {
             nomeCliente: $nomeCliente.value,
-            // precoVenda: $precoVenda.value,
+            precoVenda: calcularTotalPorUnidade() || 0,
             telefoneCliente: $telefoneCliente.value,
             vendaFiada: isFiado
         })
+        // subtrairEstoque()
         console.log(status)
     }else{
         window.alert('Por favor, insira um valor válido.')

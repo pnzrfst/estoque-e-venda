@@ -158,9 +158,8 @@ function passarInfosForm(id){
 
 function deletarVenda(event){
     let idCliente = parseInt(event.target.dataset.id);
-
     db.dadosVenda.delete(idCliente);
-    mostrarVendas(db.dadosVenda)
+    mostrarVendas(db.dadosVenda);
     console.log(db.dadosVenda);
 }
 
@@ -177,8 +176,7 @@ async function adicionarProdutosVenda() {
         .toArray()
         .then(produtosVenda => {
             produtosVenda.forEach((produto) => {
-                const produtoId = produto.id;
-                console.log(produtoId);
+               
 
                 const li = document.createElement("li");
                 li.classList.add('produtoCompra');
@@ -201,15 +199,20 @@ async function adicionarProdutosVenda() {
                 btnSalvar.classList.add('salvarProduto')
                 btnSalvar.addEventListener('click', () => {
                     calcularTotalPorUnidade();
+                    const id = produto.id;
+                    if (!idProdutos.includes(id)) {
+                        idProdutos.push(id);
+                    }
+                    subtrairEstoque()
                 });
 
                 const btnEditar = document.createElement("button");
                 btnEditar.textContent = 'Editar Produto';
-                btnEditar.classList.add('editarProduto')
+                btnEditar.classList.add('editarProduto');
 
                 const btnApagar = document.createElement("button");
                 btnApagar.textContent = 'Apagar produto';
-                btnApagar.classList.add('apagarProduto')
+                btnApagar.classList.add('apagarProduto');
 
                 divbtns.appendChild(qtdComprada);
                 divbtns.appendChild(btnSalvar);
@@ -241,9 +244,24 @@ function calcularTotalPorUnidade() {
     });
 
     console.log(total);
-    $subTotalCompra.innerText = `R$ ${total.toFixed(2)}`; 
+    $subTotalCompra.innerText = `R$ ${total.toFixed(2)}`;
 }
 
+const idProdutos = []
+async function subtrairEstoque(id){
+    const ids = idProdutos;
+
+    const produtos = await dbestoque.estoque.toArray()
+    produtos.forEach(produto => {
+       dbestoque.estoque.bulk.update({
+        key: produto.id,
+        changes:{
+            quantidade: 
+        }
+       })
+    });
+
+}
 
 
 
@@ -251,5 +269,7 @@ export default novoBanco
 export {
     salvarNoBanco,
     mostrarVendas,
-    adicionarProdutosVenda
+    adicionarProdutosVenda,
+    calcularTotalPorUnidade,
+    subtrairEstoque
 }
