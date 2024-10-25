@@ -191,6 +191,7 @@ async function adicionarProdutosVenda() {
 
                 const qtdComprada = document.createElement("input");
                 qtdComprada.type = 'number';
+                qtdComprada.setAttribute('data-produto-id', produto.id)
                 qtdComprada.placeholder = 'Digite a quantidade';
                 qtdComprada.classList.add('quantidadeComprada');
 
@@ -199,11 +200,7 @@ async function adicionarProdutosVenda() {
                 btnSalvar.classList.add('salvarProduto')
                 btnSalvar.addEventListener('click', () => {
                     calcularTotalPorUnidade();
-                    const id = produto.id;
-                    if (!idProdutos.includes(id)) {
-                        idProdutos.push(id);
-                    }
-                    subtrairEstoque()
+                    subtrairEstoque();
                 });
 
                 const btnEditar = document.createElement("button");
@@ -247,23 +244,28 @@ function calcularTotalPorUnidade() {
     $subTotalCompra.innerText = `R$ ${total.toFixed(2)}`;
 }
 
-const idProdutos = []
-async function subtrairEstoque(id){
-    const ids = idProdutos;
+async function subtrairEstoque() {
+    const produtos = await dbestoque.estoque.toArray();
+    const quantidadeNova = [{}];
 
-    const produtos = await dbestoque.estoque.toArray()
-    produtos.forEach(produto => {
-       dbestoque.estoque.bulk.update({
-        key: produto.id,
-        changes:{
-            quantidade: 
+    
+    const quantidadePorInputs = document.querySelectorAll('.quantidadeComprada');
+    for (const input of quantidadePorInputs) {
+        const produtoId = input.getAttribute('data-produto-id'); 
+        const quantidadeComprada = parseInt(input.value) || 0; // Converter para número
+
+        const produto = produtos.find(p => p.id == produtoId); 
+
+        if (produto) {
+            const novaQuantidade = produto.quantidade - quantidadeComprada;
+
+            // Atualiza somente o produto correspondente
+            await dbestoque.estoque.update(produto.id, {
+                quantidade: JSON.stringify(novaQuantidade)
+            });
         }
-       })
-    });
-
+    }
 }
-
-
 
 export default novoBanco
 export {
